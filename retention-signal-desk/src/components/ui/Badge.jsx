@@ -5,7 +5,7 @@ const variants = {
   medium: 'bg-[var(--color-risk-medium-bg)] text-[var(--color-risk-medium)] border border-[var(--color-risk-medium)] border-opacity-20',
   low: 'bg-[var(--color-risk-low-bg)] text-[var(--color-risk-low)] border border-[var(--color-risk-low)] border-opacity-20',
   neutral: 'bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] border border-[var(--color-border)]',
-  accent: 'bg-blue-50 text-[var(--color-accent)] border border-[var(--color-accent)] border-opacity-20',
+  accent: 'bg-[var(--color-accent-light)] text-[#708500] border border-[var(--color-accent)] border-opacity-30',
   default: 'bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] border border-[var(--color-border)]',
 }
 
@@ -13,7 +13,7 @@ export default function Badge({ label, variant = 'default' }) {
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-[var(--radius-sm)] px-2.5 py-1 font-mono text-xs font-bold uppercase tracking-wide',
+        'inline-flex items-center rounded-full px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[0.075em]',
         variants[variant] || variants.default,
       )}
     >

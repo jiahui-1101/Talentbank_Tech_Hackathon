@@ -17,7 +17,7 @@ function Signal({ label, value, highlight }) {
         {label}
       </div>
       <div
-        className={`mono mt-3 text-4xl font-black ${
+        className={`mt-3 text-3xl font-black sm:text-4xl ${
           highlight
             ? 'text-[var(--color-risk-high)]'
             : 'text-[var(--color-text-primary)]'
@@ -37,7 +37,7 @@ export default function WorkSignals({ employee }) {
       <div className="section-label">
         WORK SIGNALS
       </div>
-      <div className="mt-6 grid grid-cols-2 gap-6">
+      <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
         <Signal label="Active Projects" value={employee.activeProjects} />
         <Signal label="Completion Rate" value={`${employee.completionRate}%`} />
         <Signal label="Recognition (6mo)" value={employee.recognitionCount} />

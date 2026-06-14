@@ -19,11 +19,16 @@ export default function MatchingPage() {
 
   return (
     <div className="space-y-8 pb-8">
-      <section className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-white shadow-[var(--shadow-card)]" style={{ padding: 36 }}>
-        <div className="section-label text-[var(--color-accent)]">Succession Engine</div>
-        <h2 className="mt-4 text-4xl font-black">Opportunity Matching</h2>
-        <p className="mt-4 max-w-4xl text-lg leading-8 text-[var(--color-text-secondary)]">
-          Match open roles to current employees, former employees, past candidates, and former interns.
+      <section className="relative overflow-hidden rounded-[38px] border border-black/5 bg-[#e9eadf] p-6 shadow-[0_20px_60px_rgba(30,31,27,0.07)] lg:p-8">
+        <div className="pointer-events-none absolute -right-20 -top-28 h-80 w-80 rounded-full bg-[#fff29b] opacity-65 blur-[85px]" />
+        <div className="section-label">Succession Engine</div>
+
+        <h2 className="mt-4 text-[52px] font-semibold tracking-[-0.05em] leading-[1] text-[#18181a]">
+          Opportunity Matching
+        </h2>
+
+        <p className="mt-4 text-[15px] font-medium leading-6 text-[#6c6d66]">
+          Match open roles to current employees, former employees, past candidates and former interns.
         </p>
         <Button className="mt-8 min-h-14 w-full sm:w-auto" icon={Plus} onClick={() => navigate('/matching/new')}>Create New Opportunity</Button>
       </section>
@@ -36,7 +41,7 @@ export default function MatchingPage() {
         <div className="mt-6 grid grid-cols-2 gap-5 md:grid-cols-4">
           {poolStats.map(([label, count, subtitle]) => (
             <div key={label} className="rounded-[var(--radius-lg)] border border-[var(--color-border-subtle)] bg-[var(--color-bg-tertiary)]" style={{ minHeight: 150, padding: 24 }}>
-              <div className="mono text-4xl font-black text-[var(--color-accent)]">{count}</div>
+              <div className="mono text-4xl font-black text-[var(--color-accent-ink)]">{count}</div>
               <div className="section-label mt-5">{label}</div>
               <div className="mt-2 text-base font-semibold text-[var(--color-text-secondary)]">{subtitle}</div>
             </div>

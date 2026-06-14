@@ -1,21 +1,8 @@
-import { useEffect, useState } from 'react'
 import { useRiskColor } from '../../hooks/useRiskColor'
 import Card from '../ui/Card'
 
 export default function RiskScorePanel({ employee }) {
-  const [score, setScore] = useState(0)
   const riskColor = useRiskColor(employee.riskScore)
-
-  useEffect(() => {
-    setScore(0)
-    let current = 0
-    const timer = setInterval(() => {
-      current = Math.min(current + 2, employee.riskScore)
-      setScore(current)
-      if (current >= employee.riskScore) clearInterval(timer)
-    }, 16)
-    return () => clearInterval(timer)
-  }, [employee.riskScore])
 
   return (
     <Card>
@@ -23,17 +10,17 @@ export default function RiskScorePanel({ employee }) {
         <div className="section-label">
           CAREER RISK ANALYSIS
         </div>
-        <span className="mono ml-auto text-sm text-[var(--color-text-tertiary)]">
+        <span className="ml-auto text-xs font-semibold text-[var(--color-text-tertiary)] sm:text-sm">
           Updated just now
         </span>
       </div>
 
       <div className="mt-6 text-center">
-        <div className="mono text-6xl font-black" style={{ color: riskColor }}>
-          {score}
+        <div className="text-5xl font-black sm:text-6xl" style={{ color: riskColor }}>
+          {employee.riskScore}
         </div>
         <div
-          className="mono mt-2 text-lg font-bold uppercase"
+          className="mt-2 text-sm font-extrabold uppercase tracking-[0.08em] sm:text-base"
           style={{ color: riskColor }}
         >
           {employee.riskLevel}
@@ -58,8 +45,8 @@ export default function RiskScorePanel({ employee }) {
               style={{ backgroundColor: riskColor }}
             />
             <div>
-              <div className="text-lg font-bold">{driver.label}</div>
-              <div className="mt-1 text-base leading-6 text-[var(--color-text-secondary)]">
+              <div className="text-base font-bold sm:text-lg">{driver.label}</div>
+              <div className="mt-1 text-sm leading-6 text-[var(--color-text-secondary)] sm:text-base">
                 {driver.detail}
               </div>
             </div>

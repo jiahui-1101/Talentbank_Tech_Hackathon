@@ -22,9 +22,9 @@ function DetailsCard({ employee }) {
       <Header>Profile Details</Header>
       <div className="mt-6 space-y-0">
         {rows.map(([label, value]) => (
-          <div key={label} className="flex justify-between gap-6 border-b border-[var(--color-border-subtle)] py-4 text-lg last:border-0">
+          <div key={label} className="flex flex-wrap justify-between gap-x-6 gap-y-1 border-b border-[var(--color-border-subtle)] py-4 text-sm last:border-0 sm:text-base">
             <span className="font-semibold text-[var(--color-text-secondary)]">{label}</span>
-            <span className="mono font-bold text-[var(--color-text-primary)]">{value}</span>
+            <span className="font-extrabold text-[var(--color-text-primary)]">{value}</span>
           </div>
         ))}
       </div>
@@ -52,13 +52,13 @@ export default function EmployeeDetailPage() {
 
   return (
     <div className="space-y-7 pb-8">
-      <section className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-white p-6 shadow-[var(--shadow-card)]">
-        <div className="flex items-center gap-6">
+      <section className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-white p-5 shadow-[var(--shadow-card)] sm:p-7">
+        <div className="flex items-center gap-4 sm:gap-6">
           <Avatar name={employee.name} score={employee.riskScore} size="lg" />
           <div className="min-w-0 flex-1">
-            <div className="section-label text-[var(--color-accent)]">Risk Drill-In</div>
-            <h2 className="mt-2 truncate text-3xl font-black">{employee.name}</h2>
-            <div className="mt-2 text-base font-semibold text-[var(--color-text-secondary)]">{employee.role} · {employee.department}</div>
+            <div className="section-label text-[var(--color-accent-ink)]">Risk Drill-In</div>
+            <h2 className="mt-2 break-words text-2xl font-black sm:text-3xl">{employee.name}</h2>
+            <div className="mt-2 text-sm font-semibold text-[var(--color-text-secondary)] sm:text-base">{employee.role} · {employee.department}</div>
           </div>
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
@@ -68,13 +68,13 @@ export default function EmployeeDetailPage() {
         </div>
       </section>
 
-      <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+      <div className="grid items-start gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.75fr)]">
         <div className="space-y-6">
           <RiskScorePanel employee={employee} />
 
           <Card className="border-l-4" style={{ borderLeftColor: riskColor }}>
             <Header>Predicted Trajectory</Header>
-            <p className="mt-4 text-base italic leading-7 text-[var(--color-text-primary)]">{employee.trajectory}</p>
+            <p className="mt-4 text-sm italic leading-7 text-[var(--color-text-primary)] sm:text-base">{employee.trajectory}</p>
           </Card>
 
           <WorkSignals employee={employee} />
@@ -90,8 +90,8 @@ export default function EmployeeDetailPage() {
         <aside className="space-y-6">
           <SuggestedActions actions={employee.suggestedActions} />
 
-          <Card className="bg-[var(--color-accent-light)]" style={{ padding: 32 }}>
-            <Button className="min-h-14 w-full" icon={ArrowRight} onClick={findSuccessor}>Find Potential Successor →</Button>
+          <Card className="bg-[#eef3f0]">
+            <Button className="min-h-12 w-full" icon={ArrowRight} onClick={findSuccessor}>Find Potential Successor</Button>
             <Button variant="ghost" className="mt-4 min-h-12 w-full" onClick={() => navigate('/team')}>← Back to Team</Button>
           </Card>
 

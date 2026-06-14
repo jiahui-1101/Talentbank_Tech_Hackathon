@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { Outlet, NavLink, useLocation } from 'react-router-dom'
 import { Briefcase, Home, Plus, Users } from 'lucide-react'
 import employees from '../../data/employees'
@@ -29,6 +30,7 @@ function getPageTitle(pathname) {
 
 export default function AppShell() {
   const { pathname } = useLocation()
+  const scrollContainerRef = useRef(null)
   const highRisk = employees.filter((employee) => employee.riskLevel === 'High').length
   const openRoles = opportunities.filter((opportunity) => opportunity.status === 'Open').length
   const tickerItems = [
@@ -40,23 +42,55 @@ export default function AppShell() {
     'AI ADVISOR · demo mode',
   ]
 
+  useEffect(() => {
+    scrollContainerRef.current?.scrollTo({ top: 0, left: 0 })
+  }, [pathname])
+
   return (
     <div className="flex h-screen w-screen flex-col overflow-hidden bg-[var(--color-bg)]">
-      <TopBar title={getPageTitle(pathname)} />
+      <TopBar title={getPageTitle(pathname)}>
+        <nav className="hidden items-center gap-1 rounded-full border border-black/[0.06] bg-white/80 p-1 shadow-[0_8px_24px_rgba(20,21,18,0.05)] backdrop-blur-xl md:flex">
+          {navItems.map(([label, Icon, to]) => (
+            <NavLink
+              key={to}
+              to={to}
+              end={to === '/'}
+              className={({ isActive }) =>
+                cn(
+                  'flex h-9 min-w-[88px] items-center justify-center gap-2 rounded-full px-4 text-[11px] font-black transition-all duration-300',
+                  isActive
+                    ? 'bg-[#20211f] text-white shadow-[0_6px_16px_rgba(0,0,0,0.16)]'
+                    : 'text-black/45 hover:bg-[#eef0e6] hover:text-black',
+                )
+              }
+            >
+              <Icon size={14} />
+              {label}
+            </NavLink>
+          ))}
+        </nav>
+      </TopBar>
 
-      <div className="flex h-7 flex-shrink-0 items-center overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-bg-tertiary)]">
-        <div className="flex animate-[ticker_42s_linear_infinite] gap-20 whitespace-nowrap font-mono text-xs tracking-[0.08em] text-[var(--color-text-secondary)]">
+      <div className="flex h-7 flex-shrink-0 items-center overflow-hidden border-y border-black/[0.045] bg-[#20211f] text-white">
+        <div className="flex animate-[ticker_42s_linear_infinite] gap-20 whitespace-nowrap font-mono text-[9px] font-bold uppercase tracking-[0.1em] text-white/55">
           {[...tickerItems, ...tickerItems, ...tickerItems].map((item, index) => (
             <span key={`${item}-${index}`} className="inline-flex items-center gap-2">
-              <span className="h-1 w-1 rounded-full bg-current" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
               {item}
             </span>
           ))}
         </div>
       </div>
 
-      <nav className="relative z-10 flex h-20 flex-shrink-0 items-center justify-center gap-5 border-b border-[var(--color-border)] bg-white px-8 shadow-[0_4px_16px_rgba(13,17,23,0.04)]">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent" />
+      <main className="relative min-h-0 flex-1 overflow-hidden">
+        <div ref={scrollContainerRef} className="page-enter h-full overflow-y-auto overflow-x-hidden px-4 py-4 sm:px-6 lg:px-8 lg:py-6">
+          <div className="mx-auto min-h-full max-w-[1600px]">
+            <Outlet />
+          </div>
+        </div>
+      </main>
+
+      <nav className="flex h-16 flex-shrink-0 items-center justify-around border-t border-black/[0.06] bg-white px-3 md:hidden">
         {navItems.map(([label, Icon, to]) => (
           <NavLink
             key={to}
@@ -64,29 +98,16 @@ export default function AppShell() {
             end={to === '/'}
             className={({ isActive }) =>
               cn(
-                'relative flex h-12 min-w-36 items-center justify-center gap-2 rounded-[var(--radius-lg)] border px-5 font-mono text-xs font-bold uppercase tracking-[0.08em] transition-all after:absolute after:bottom-2 after:left-5 after:right-5 after:h-0.5 after:origin-left after:rounded-full after:bg-gradient-to-r after:from-[var(--color-accent)] after:to-[var(--color-accent-hover)] after:transition-transform',
-                isActive
-                  ? 'border-blue-200 bg-[var(--color-accent-light)] text-[var(--color-accent)] after:scale-x-100'
-                  : 'border-transparent text-[var(--color-text-tertiary)] after:scale-x-0 hover:border-[var(--color-border)] hover:bg-[var(--color-bg-tertiary)] hover:text-[var(--color-text-primary)]',
+                'flex min-w-[64px] flex-col items-center gap-1 rounded-2xl px-3 py-2 text-[9px] font-black uppercase tracking-wider transition',
+                isActive ? 'bg-[#20211f] text-[var(--color-accent)]' : 'text-black/35',
               )
             }
           >
-            <Icon size={16} />
+            <Icon size={17} />
             {label}
           </NavLink>
         ))}
       </nav>
-
-      <main className="relative z-10 min-h-0 flex-1 overflow-hidden">
-        <div
-          className="page-enter h-full overflow-y-auto overflow-x-hidden"
-          style={{ padding: '36px 48px 56px' }}
-        >
-          <div className="min-h-full">
-            <Outlet />
-          </div>
-        </div>
-      </main>
     </div>
   )
 }
