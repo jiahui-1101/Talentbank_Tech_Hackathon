@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react'
-
 export default function RiskDistribution({ counts, total }) {
-  const [ready, setReady] = useState(false)
-  useEffect(() => setReady(true), [])
   const segments = [
     ['Low', counts.Low, 'bg-[var(--color-risk-low)] rounded-l-full'],
     ['Medium', counts.Medium, 'bg-[var(--color-risk-medium)]'],
@@ -18,8 +14,8 @@ export default function RiskDistribution({ counts, total }) {
         {segments.map(([level, count, color]) => (
           <div
             key={level}
-            className={`h-full transition-all duration-700 ${color}`}
-            style={{ width: ready ? `${(count / total) * 100}%` : '0%' }}
+            className={`h-full origin-left animate-[riskGrow_700ms_cubic-bezier(0.2,0.8,0.2,1)_both] ${color}`}
+            style={{ width: `${(count / total) * 100}%` }}
           />
         ))}
       </div>

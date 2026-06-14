@@ -48,37 +48,42 @@ export default function MatchResultPage() {
   }
 
   return (
-    <div className="space-y-8 pb-8">
+    <div className="space-y-6 pb-8">
       {routeState?.fromEmployee ? (
-        <section className="flex items-center gap-5 rounded-[var(--radius-xl)] border-l-4 border-[var(--color-risk-high)] bg-[var(--color-risk-high-bg)] p-8 shadow-[var(--shadow-card)]">
+        <section className="flex items-center gap-4 rounded-[var(--radius-xl)] border-l-4 border-[var(--color-risk-high)] bg-[var(--color-risk-high-bg)] p-5 shadow-[var(--shadow-card)] sm:p-7">
           <Avatar name={routeState.fromEmployee.name} size="sm" />
           <div>
-            <div className="text-xl font-black">Succession match for {routeState.fromEmployee.name}</div>
-            <div className="mt-2 text-lg font-semibold text-[var(--color-text-secondary)]">Finding candidates for {opportunity.title}</div>
+            <div className="text-base font-black sm:text-xl">Succession match for {routeState.fromEmployee.name}</div>
+            <div className="mt-1 text-sm font-semibold text-[var(--color-text-secondary)] sm:text-base">Finding candidates for {opportunity.title}</div>
           </div>
         </section>
       ) : null}
 
-      <section className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-white p-8 shadow-[var(--shadow-card)]">
-        <div className="section-label text-[var(--color-accent)]">Top 10 Matches</div>
+      <section className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-white p-5 shadow-[var(--shadow-card)] sm:p-7">
+        <div className="section-label text-[var(--color-accent-ink)]">Top 10 Matches</div>
         <div className="mt-4 flex flex-wrap items-center gap-3">
-          <h2 className="text-4xl font-black">{opportunity.title}</h2>
+          <h2 className="break-words text-2xl font-black sm:text-4xl">{opportunity.title}</h2>
           <Badge label={opportunity.department} variant="default" />
           <Badge label={opportunity.urgency} variant={opportunity.urgency.toLowerCase()} />
         </div>
-        <div className="mt-4 text-lg font-semibold text-[var(--color-text-secondary)]">
+        <div className="mt-4 text-sm font-semibold text-[var(--color-text-secondary)] sm:text-base">
           Matched {top10.length} candidates from pool of {getTalentPool(routeState?.fromEmployee?.id).length}
         </div>
       </section>
 
       <section className="rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-white p-6 shadow-[var(--shadow-card)]">
         <div className="mb-4 section-label">Sort Candidates</div>
-        <div className="flex gap-4">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
           {sortOptions.map(([value, label]) => (
             <button
               key={value}
               type="button"
-              className={cn('min-h-14 flex-1 rounded-full px-5 py-3 text-base font-black uppercase tracking-wide transition', sortBy === value ? 'bg-[var(--color-accent)] text-white' : 'bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]')}
+              className={cn(
+                'min-h-11 rounded-full px-5 py-3 text-[12px] font-extrabold uppercase tracking-[0.075em] transition-all active:scale-[0.98]',
+                sortBy === value
+                  ? 'bg-[#47cfc0] text-[#123d39] shadow-[0_8px_18px_rgba(71,207,192,0.2)]'
+                  : 'bg-[#252624] text-white/70 hover:text-white',
+              )}
               onClick={() => setSortBy(value)}
             >
               {label}

@@ -14,12 +14,12 @@ export default function SuggestedActions({ actions }) {
         {actions.map((action, index) => (
           <div
             key={action}
-            className="flex items-start gap-4 border-b border-[var(--color-border-subtle)] py-5 last:border-0"
+            className="flex items-start gap-3 border-b border-[var(--color-border-subtle)] py-4 last:border-0 sm:gap-4 sm:py-5"
           >
-            <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[var(--color-accent)] text-base font-bold text-white">
+            <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#47cfc0] text-sm font-extrabold text-[#123d39]">
               {index + 1}
             </div>
-            <div className="flex-1 text-lg font-semibold leading-7 text-[var(--color-text-primary)]">
+            <div className="flex-1 text-sm font-bold leading-6 text-[var(--color-text-primary)] sm:text-base">
               {action}
             </div>
             <div className="h-6 w-6 flex-shrink-0 rounded border-2 border-[var(--color-border)]" />

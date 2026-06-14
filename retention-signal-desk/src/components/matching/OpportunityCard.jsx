@@ -7,7 +7,7 @@ function Pill({ children, accent = false }) {
     <span
       className={`rounded-full px-3 py-1 text-sm font-semibold ${
         accent
-          ? 'bg-blue-50 text-[var(--color-accent)]'
+          ? 'bg-[#f5ffd8] text-[#95b300]'
           : 'bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]'
       }`}
     >
@@ -27,8 +27,13 @@ export default function OpportunityCard({ opportunity, onMatch }) {
         <Badge label={opportunity.urgency} variant={opportunity.urgency.toLowerCase()} />
       </div>
 
-      <div className="mt-5 flex items-center gap-3">
-        <Badge label={opportunity.department} variant="default" />
+      <div className="mt-8 flex flex-wrap items-center gap-3">
+        <Badge
+          label={opportunity.status}
+          variant={opportunity.status === 'Open' ? 'low' : 'default'}
+        />
+      </div>
+      <div className="ml-auto flex gap-2">
         <span className="text-base font-semibold text-[var(--color-text-secondary)]">
           {opportunity.minExperience}+ yrs exp
         </span>
@@ -43,17 +48,24 @@ export default function OpportunityCard({ opportunity, onMatch }) {
         {opportunity.cultureTags.map((tag) => <Pill key={tag} accent>{tag}</Pill>)}
       </div>
 
-      <div className="mt-8 flex items-center justify-between gap-3">
+      <div className="mt-8 flex flex-wrap items-center gap-3">
         <Badge
           label={opportunity.status}
           variant={opportunity.status === 'Open' ? 'low' : 'default'}
         />
-        <div className="flex gap-2">
-          <Button variant="ghost" className="px-0 py-0" onClick={onMatch}>
+
+        <div className="ml-auto flex gap-2">
+          <Button
+            variant="ghost"
+            className="px-5 py-3 rounded-full bg-[#f1f2ea] text-[15px] font-semibold tracking-[-0.02em]"
+            onClick={onMatch}
+          >
             View Matches
           </Button>
           {opportunity.status === 'Open' ? (
-            <Button variant="secondary">Details</Button>
+            <Button variant="secondary" className=" px-5 py-3 rounded-full text-[15px] font-semibold tracking-[-0.02em]">
+              Details
+            </Button>
           ) : null}
         </div>
       </div>

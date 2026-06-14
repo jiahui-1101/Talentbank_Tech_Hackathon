@@ -42,7 +42,7 @@ export default function EmployeeCard({ employee, index }) {
       <div className="mt-5 h-3 overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
         <div className={`h-full rounded-full ${riskStyles[employee.riskLevel]}`} style={{ width: `${employee.riskScore}%` }} />
       </div>
-      <div className="mt-5 text-base font-black text-[var(--color-accent)]">→ Tap to drill into risk profile</div>
+      <div className="mt-5 text-[15px] font-medium text-[#8f9800]">→ Tap to drill into risk profile</div>
     </button>
   )
 }

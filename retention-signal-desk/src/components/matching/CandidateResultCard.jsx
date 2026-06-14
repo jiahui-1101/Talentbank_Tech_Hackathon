@@ -6,7 +6,7 @@ import { cn } from '../../lib/cn'
 
 const sourceConfig = {
   existing_employee: { color: 'var(--color-risk-low)', label: 'Internal Talent' },
-  former_employee: { color: 'var(--color-accent)', label: 'Former Employee' },
+  former_employee: { color: '#6577d8', label: 'Former Employee' },
   past_candidate: { color: 'var(--color-risk-high)', label: 'Past Candidate' },
   former_intern: { color: 'var(--color-risk-medium)', label: 'Former Intern' },
 }
@@ -32,10 +32,10 @@ export default function CandidateResultCard({ candidate, opportunity, rank, matc
 
   return (
     <div className="animate-slide-up overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-subtle)] bg-white shadow-[var(--shadow-card)] transition-all duration-200" style={{ borderLeft: `4px solid ${config.color}` }}>
-      <div className="flex items-start gap-7 p-8">
-        <div>
+      <div className="grid gap-5 p-5 sm:p-7 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-start">
+        <div className="flex items-center gap-3 md:block">
           <Avatar name={candidate.name} size="md" />
-          <span className="mt-3 inline-block rounded-full px-3 py-1 text-sm font-bold" style={{ backgroundColor: `color-mix(in srgb, ${config.color} 15%, transparent)`, color: config.color }}>{config.label}</span>
+          <span className="inline-block rounded-full px-3 py-1 text-xs font-bold md:mt-3" style={{ backgroundColor: `color-mix(in srgb, ${config.color} 15%, transparent)`, color: config.color }}>{config.label}</span>
         </div>
 
         <div className="min-w-0 flex-1">
@@ -44,14 +44,14 @@ export default function CandidateResultCard({ candidate, opportunity, rank, matc
             <span className="text-xl font-black">{candidate.name}</span>
           </div>
           <div className="mt-2 text-base font-semibold text-[var(--color-text-secondary)]">{candidate.experienceYears} years experience</div>
-          <div className="mt-5 flex flex-wrap gap-2.5">
+          <div className="mt-4 flex flex-wrap gap-2">
             {candidate.skills.map((skill) => {
               const lower = skill.toLowerCase()
               const matches = requiredSkills.some((required) => required.includes(lower) || lower.includes(required))
               return (
                 <span
                   key={skill}
-                  className={cn('rounded-full px-3 py-1 text-sm font-semibold', !matches && 'bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]')}
+                  className={cn('rounded-full px-3 py-1 text-xs font-semibold sm:text-sm', !matches && 'bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]')}
                   style={matches ? { backgroundColor: `color-mix(in srgb, ${config.color} 15%, transparent)`, color: config.color } : undefined}
                 >
                   {skill}
@@ -61,22 +61,24 @@ export default function CandidateResultCard({ candidate, opportunity, rank, matc
           </div>
         </div>
 
-        <div className="flex flex-shrink-0 flex-col items-center text-center">
-          <div className="mono text-4xl font-black" style={{ color: config.color }}>{matchScore}</div>
+        <div className="flex items-center gap-4 text-center md:flex-col md:gap-0">
+          <div>
+          <div className="text-3xl font-black sm:text-4xl" style={{ color: config.color }}>{matchScore}</div>
           <span className="block text-xs font-bold uppercase tracking-wider text-[var(--color-text-tertiary)]">MATCH</span>
-          <div className="mt-3"><AvailabilityRing score={candidate.availabilityScore} /></div>
+          </div>
+          <div className="md:mt-3"><AvailabilityRing score={candidate.availabilityScore} /></div>
           <div className="mt-2 text-xs font-bold text-[var(--color-text-tertiary)]">Availability</div>
         </div>
       </div>
 
-      <div className="flex cursor-pointer items-center justify-between border-t border-[var(--color-border-subtle)] px-8 py-5 transition-all hover:bg-[var(--color-bg-secondary)]" onClick={() => setExpanded(!expanded)}>
+      <button type="button" className="flex w-full cursor-pointer items-center justify-between border-t border-[var(--color-border-subtle)] px-5 py-4 text-left transition-all hover:bg-[var(--color-bg-secondary)] sm:px-7" onClick={() => setExpanded(!expanded)}>
         <div className="text-base font-bold text-[var(--color-text-secondary)]">AI Outreach Draft</div>
         <ChevronDown size={16} className={cn('transition-transform duration-200', expanded && 'rotate-180')} />
-      </div>
+      </button>
 
       <div className="overflow-hidden transition-all duration-300" style={{ maxHeight: expanded ? '320px' : '0px' }}>
-        <div className="px-8 pb-8">
-          <div className="rounded-[var(--radius-md)] bg-[var(--color-bg-secondary)] p-6 text-lg leading-8 text-[var(--color-text-secondary)]">{message}</div>
+        <div className="px-5 pb-5 sm:px-7 sm:pb-7">
+          <div className="rounded-[var(--radius-md)] bg-[var(--color-bg-secondary)] p-5 text-sm leading-7 text-[var(--color-text-secondary)] sm:text-base">{message}</div>
           <button type="button" className={cn('mt-4 flex items-center gap-2 text-sm font-bold', copied ? 'text-[var(--color-risk-low)]' : 'text-[var(--color-text-secondary)]')} onClick={copyMessage}>
             {copied ? <Check size={14} /> : <Copy size={14} />}
             {copied ? 'Copied!' : 'Copy Message'}
