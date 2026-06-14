@@ -1,42 +1,347 @@
 @import "tailwindcss";
 
+@import "tailwindcss";
+
+/* ==========================================================
+   CAREER OS DESIGN SYSTEM
+   ========================================================== */
+
 :root {
-  --color-bg: #E8ECF4;
-  --color-bg-secondary: #F1F5F9;
-  --color-bg-tertiary: #F8FAFC;
-  --color-surface: #FFFFFF;
-  --color-border: #DDE3EF;
-  --color-border-subtle: #E7ECF5;
-  --color-border-strong: #B8C3D6;
-  --color-text-primary: #0D1117;
-  --color-text-secondary: #5C6A82;
-  --color-text-tertiary: #9AA5B4;
-  --color-accent: #1748C8;
-  --color-accent-light: #EBF0FF;
-  --color-accent-hover: #3B6EF0;
-  --color-risk-high: #DC2626;
-  --color-risk-high-bg: #FEF2F2;
-  --color-risk-medium: #D97706;
-  --color-risk-medium-bg: #FFFBEB;
-  --color-risk-low: #059669;
-  --color-risk-low-bg: #ECFDF5;
-  --shadow-card: 0 1px 4px rgba(0,0,0,0.05);
-  --shadow-panel: 0 6px 20px rgba(23,72,200,0.10);
-  --radius-sm: 4px;
-  --radius-md: 7px;
-  --radius-lg: 10px;
-  --radius-xl: 12px;
+  /* Backgrounds */
+  --color-bg: #080b14;
+  --color-bg-secondary: #0f172a;
+  --color-bg-tertiary: #111827;
+
+  /* Surfaces */
+  --color-surface: rgba(17, 24, 39, 0.78);
+  --color-surface-solid: #111827;
+
+  /* Borders */
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-subtle: rgba(255, 255, 255, 0.04);
+
+  /* Typography */
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-tertiary: #64748b;
+
+  /* Accent */
+  --color-accent: #6366f1;
+  --color-accent-hover: #818cf8;
+  --color-accent-light: rgba(99, 102, 241, 0.12);
+
+  /* Success */
+  --color-success: #10b981;
+  --color-success-bg: rgba(16, 185, 129, 0.12);
+
+  /* Warning */
+  --color-warning: #f59e0b;
+  --color-warning-bg: rgba(245, 158, 11, 0.12);
+
+  /* Danger */
+  --color-danger: #f43f5e;
+  --color-danger-bg: rgba(244, 63, 94, 0.12);
+
+  /* Legacy aliases */
+  --color-risk-high: #f43f5e;
+  --color-risk-high-bg: rgba(244, 63, 94, 0.12);
+
+  --color-risk-medium: #f59e0b;
+  --color-risk-medium-bg: rgba(245, 158, 11, 0.12);
+
+  --color-risk-low: #10b981;
+  --color-risk-low-bg: rgba(16, 185, 129, 0.12);
+
+  /* Shadows */
+  --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.35);
+
+  --shadow-panel: 0 20px 60px rgba(0, 0, 0, 0.4);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ==========================================================
+   GLOBAL
+   ========================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  overflow: hidden;
   min-height: 100vh;
-  font-family: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, sans-serif;
-  background: var(--color-bg);
+
+  margin: 0;
+
   color: var(--color-text-primary);
-  text-rendering: optimizeLegibility;
+
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(99, 102, 241, 0.2),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 15% 85%,
+      rgba(16, 185, 129, 0.08),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #080b14 0%,
+      #0b1020 100%
+    );
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ==========================================================
+   ANIMATIONS
+   ========================================================== */
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.35s ease-out both;
+}
+
+.page-enter {
+  animation: pageEnter 0.25s ease-out both;
+}
+
+/* ==========================================================
+   TYPOGRAPHY
+   ========================================================== */
+
+.mono {
+  font-family:
+    "SF Mono",
+    "Fira Code",
+    monospace;
+
+  font-variant-numeric: tabular-nums;
+}
+
+.section-label {
+  font-family:
+    "SF Mono",
+    "Fira Code",
+    monospace;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  color: var(--color-text-tertiary);
+}
+
+/* ==========================================================
+   GLASS SYSTEM
+   ========================================================== */
+
+.glass-card {
+  background: rgba(17, 24, 39, 0.72);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(99, 102, 241, 0.28);
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(99, 102, 241, 0.12);
+}
+
+/* ==========================================================
+   HERO EFFECT
+   ========================================================== */
+
+.hero-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-glow::before {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  top: -180px;
+  right: -120px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(99, 102, 241, 0.18),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+/* ==========================================================
+   STATUS PILLS
+   ========================================================== */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  backdrop-filter: blur(10px);
+}
+
+.status-high {
+  color: var(--color-danger);
+  background: var(--color-danger-bg);
+}
+
+.status-medium {
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+}
+
+.status-low {
+  color: var(--color-success);
+  background: var(--color-success-bg);
+}
+
+/* ==========================================================
+   KPI NUMBERS
+   ========================================================== */
+
+.kpi-value {
+  font-size: 2.25rem;
+  line-height: 1;
+
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.kpi-subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-tertiary);
+}
+
+/* ==========================================================
+   SCROLLBAR
+   ========================================================== */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(154, 165, 180, 0.45);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(154, 165, 180, 0.7);
+}
+
+/* ==========================================================
+   FOCUS
+   ========================================================== */
+
+*:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ==========================================================
+   SELECTION
+   ========================================================== */
+
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: white;
 }
 
 @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
