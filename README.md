@@ -1,6 +1,6 @@
-# Retention Signal Desk
+# NextTalent
 
-Retention Signal Desk is an AI-powered employee retention and talent re-engagement platform for employers. It helps companies detect which employees may be at risk of leaving before they resign, while also helping hiring managers rediscover strong past candidates, former employees, and ex-interns when new roles open.
+NextTalent is an AI-powered employee retention and talent re-engagement platform for employers. It helps companies detect which employees may be at risk of leaving before they resign, while also helping hiring managers rediscover strong past candidates, former employees, and ex-interns when new roles open.
 
 ## One-liner
 
@@ -88,7 +88,7 @@ The synthetic data is designed to show realistic variation, including high-risk 
 
 ## Why Talentbank
 
-Retention Signal Desk directly addresses two Talentbank employer-side challenge areas: Talent Retention Signals and Talent Re-Engagement.
+NextTalent directly addresses two Talentbank employer-side challenge areas: Talent Retention Signals and Talent Re-Engagement.
 
 The product fits Talentbank because it can use data that Talentbank's employer network already generates, including job postings, interview records, candidate profiles, and employer feedback. This reduces the cold-start problem and makes adoption easier for companies.
 
