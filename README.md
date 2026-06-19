@@ -93,3 +93,13 @@ NextTalent directly addresses two Talentbank employer-side challenge areas: Tale
 The product fits Talentbank because it can use data that Talentbank's employer network already generates, including job postings, interview records, candidate profiles, and employer feedback. This reduces the cold-start problem and makes adoption easier for companies.
 
 Employers do not need to change their existing workflows. The system reads data from what they already do and adds an intelligence layer on top. This makes Retention Signal Desk practical as a value-added feature for Talentbank's existing employer network.
+
+## Team Contributions
+
+| Team member | Role | Contributions evidenced in the repository | Visible non-merge commits* |
+|---|---|---|---:|
+| **Wong Jia Hui** | **Team Leader · Prototype Lead · React Developer** | Created the initial Retention Signal Desk prototype, employee/candidate datasets, risk dashboard, matching and opportunity flows, and documented the product, AI usage and Talentbank fit. | **4 / 6** |
+| **Bong Zi Shan** | **UI/UX Developer** | Refined the dashboard, team heat map, opportunity flow, application shell, branding assets and shared interface styling. | **1 / 6** |
+| **Lee Mei Shuet** | **UI Developer** | Contributed final interface and responsive styling refinements. | **1 / 6** |
+
+<sub>*Counts are non-merge commits visible in the public Git history. Some contributions were delivered as large commits, so the counts are not a measure of effort.</sub>
